@@ -21,8 +21,6 @@ var LinkedList = function() {
   this.size = 0;
 };
 
-
-
 LinkedList.prototype.insert = function(index, value) {
   if (index > this.size){
     console.log('error, index not in list');
@@ -53,36 +51,54 @@ LinkedList.prototype.insert = function(index, value) {
 
 LinkedList.prototype.remove = function(index) {
   var currentNode = this.head;
+  if (index === null || index === undefined){
+      index = this.size-1;
+  }
   if (index === 0){
     this.head = this.head.next;
     this.size--;
     return;
   }
-  if (index === null || index === undefined){
-    index = this.size-1;
-  }
-
   for (var i = 0; i < index-1; i++){
     currentNode=currentNode.next;
+    console.log('this is the currentNode during the loop', currentNode);
   }
-  currentNode.next = currentNode.next.next;
+  console.log('this is the currentNode right before the removed node', currentNode);
   if (index === this.size - 1){
-    console.log('re-assigning tail, ',currentNode);
-    this.tail = currentNode.next;
+    console.log('re-assigning tail, ', currentNode.next);
+    this.tail = currentNode;
+    this.tail.next = null;
+  }else{
+    currentNode.next = currentNode.next.next;
   }
   this.size--;
 };
 
 LinkedList.prototype.get = function (index) {
+  if (index > this.size){
+      console.log('error, index not in list');
+      return;
+  }
   var node = this.head;
   while(index > 0){
     node = node.next;
+    index--;
   }
   return node.data;
 };
 
 LinkedList.prototype.set = function(index, value) {
-  // ...
+  if (index > this.size){
+      console.log('error, index not in list');
+      return;
+  }
+  var node = this.head;
+  while(index > 0){
+      node = node.next;
+      index--;
+  }
+  node.data=value;
+  return node;
 };
 
 LinkedList.prototype.find = function(value) {
@@ -98,7 +114,14 @@ LinkedList.prototype.find = function(value) {
 };
 
 LinkedList.prototype.contains = function(value) {
-  // ...
+  var currentNode = this.head;
+  for (var i = 0; i < this.size ; i++){
+    if (currentNode.data === value){
+      return true;
+    }
+    currentNode = currentNode.next;
+  }
+  return false;
 };
 
 var myList = new LinkedList();
