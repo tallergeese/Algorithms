@@ -84,7 +84,11 @@ Vector.prototype.remove = function(index) {
   for (var i = index; i < this.storage.length; i++ ){
     this.storage[i] = this.storage[i+1];
   }
-  this.storage.pop();
+  var newArray = [];
+  for (var v = 0; v < this.storage.length-1; v++){
+    newArray[v] = this.storage[v];
+  }
+  this.storage = newArray;
   this.length--;
   return this.storage;
 };

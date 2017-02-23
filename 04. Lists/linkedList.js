@@ -43,7 +43,7 @@ LinkedList.prototype.insert = function(index, value) {
           currentNode = currentNode.next;
       }
       currentNode.next = new LinkedListNode(value, currentNode.next);
-      if (index === ++this.size){
+      if (index === this.size++){
           this.tail=currentNode.next;
           this.tail.next = null;
       }
@@ -53,10 +53,24 @@ LinkedList.prototype.insert = function(index, value) {
 
 LinkedList.prototype.remove = function(index) {
   var currentNode = this.head;
-  for (var i = 0; i < index-1; i++){
-
+  if (index === 0){
+    this.head = this.head.next;
+    this.size--;
+    return;
+  }
+  if (index === null || index === undefined){
+    index = this.size-1;
   }
 
+  for (var i = 0; i < index-1; i++){
+    currentNode=currentNode.next;
+  }
+  currentNode.next = currentNode.next.next;
+  if (index === this.size - 1){
+    console.log('re-assigning tail, ',currentNode);
+    this.tail = currentNode.next;
+  }
+  this.size--;
 };
 
 LinkedList.prototype.get = function (index) {
