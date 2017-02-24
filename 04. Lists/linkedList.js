@@ -104,13 +104,14 @@ LinkedList.prototype.set = function(index, value) {
 LinkedList.prototype.find = function(value) {
   var node = this.head;
   var index = this.length;
-  while (node !== null && index > 0){
+  while (index > 0){
     if (node.data === value){
       return node;
     }
     node = node.next;
     index--;
   }
+  return false;
 };
 
 LinkedList.prototype.contains = function(value) {
