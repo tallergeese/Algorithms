@@ -66,7 +66,7 @@ var LinkedListNode = function(data, next) {
 };
 
 var LinkedList = function() {
-  this.head = new LinkedListNode(null, null);
+  this.head = null;
   this.tail = this.head;
   this.size = 0;
 };
@@ -200,6 +200,8 @@ function toArray(fromWhichNode) {
 
 var list = new LinkedList();
 var x = null;
+
+console.log(list);
 
 console.log("Inserts");
 list.insert(null, 0);
