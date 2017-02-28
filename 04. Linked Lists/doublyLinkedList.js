@@ -26,11 +26,12 @@ var DoublyLinkedListNode = function(data, next, previous) {
 var DoublyLinkedList = function() {
   this.head = new DoublyLinkedListNode(null, null, null);
   this.tail = this.head;
+  this.size = 0;
 };
 
 
 
-LinkedList.prototype.insert = function(index, value) {
+DoublyLinkedList.prototype.insert = function(index, value) {
   if (index > this.size || index < 0){
     console.log('error, index not in list');
     return null;
@@ -40,7 +41,8 @@ LinkedList.prototype.insert = function(index, value) {
   }
   var currentNode = this.head;
   if (index === 0){
-    this.head = new DoublyLinkedListNode(value, this.head);
+    this.head = new DoublyLinkedListNode(value, this.head, null);
+    this.head.next.previous = this.head;
     if (++this.size === 1){
       this.tail = this.head;
     }
@@ -50,6 +52,7 @@ LinkedList.prototype.insert = function(index, value) {
       currentNode = currentNode.next;
     }
     currentNode.next = new DoublyLinkedListNode(value, currentNode.next, currentNode);
+    currentNode.next.next.previous = currentNode.next;
     if (index === this.size++){
       this.tail=currentNode.next;
       this.tail.next = null;
@@ -57,21 +60,22 @@ LinkedList.prototype.insert = function(index, value) {
   }
   return currentNode.next;};
 
-LinkedList.prototype.insertAfter = function(node, value) {
+DoublyLinkedList.prototype.insertAfter = function(node, value) {
   // ...
 };
 
-LinkedList.prototype.insertBefore = function(node, value) {
+DoublyLinkedList.prototype.insertBefore = function(node, value) {
   // ...
 };
 
-LinkedList.prototype.remove = function(index) {
+DoublyLinkedList.prototype.remove = function(index) {
   var currentNode = this.head;
   if (index === null || index === undefined){
     index = this.size-1;
   }
   if (index === 0){
     this.head = this.head.next;
+    this.head.previous = null;
     this.size--;
     return;
   }
@@ -83,22 +87,83 @@ LinkedList.prototype.remove = function(index) {
     this.tail.next = null;
   }else{
     currentNode.next = currentNode.next.next;
+    currentNode.next.previous = currentNode;
   }
   this.size--;
 };
 
-LinkedList.prototype.get = function (index) {
-  // ...
+DoublyLinkedList.prototype.get = function (index) {
+  if (index > this.size){
+    console.log('error, index not in list');
+    return;
+  }
+  var node = this.head;
+  while(index > 0){
+    node = node.next;
+    index--;
+  }
+  return node.data;
 };
 
-LinkedList.prototype.set = function(index, value) {
-  // ...
+DoublyLinkedList.prototype.set = function(index, value) {
+  if (index > this.size){
+    console.log('error, index not in list');
+    return;
+  }
+  var node = this.head;
+  while(index > 0){
+    node = node.next;
+    index--;
+  }
+  node.data=value;
+  return node;
 };
 
-LinkedList.prototype.find = function(value) {
-  // ...
-};
+DoublyLinkedList.prototype.find = function(value) {
+  var node = this.head;
+  var index = this.size;
+  while (index > 0){
+    if (node.data === value){
+      return node;
+    }
+    node = node.next;
+    index--;
+  }
+  return node;};
 
-LinkedList.prototype.contains = function(value) {
-  // ...
-};
+DoublyLinkedList.prototype.contains = function(value) {
+  var currentNode = this.head;
+  for (var i = 0; i < this.size ; i++){
+    if (currentNode.data === value){
+      return true;
+    }
+    currentNode = currentNode.next;
+  }
+  return false;};
+
+function nthOddIndexFromEnd(n, list){
+  var node = list.tail;
+  var index = list.size-1;
+  var count = 0;
+  while (node){
+    if (node.data%2 !== 0){
+      count++;
+      if (count === n){
+        return index;
+      }
+    }
+    index--;
+    node = node.previous;
+  }
+  return null;
+}
+
+var myList = new DoublyLinkedList();
+myList.insert(0,0);
+myList.insert(0,1);
+myList.insert(0,2);
+myList.insert(0,3);
+myList.insert(2,22);
+myList.insert(2,33);
+myList.insert(6,444);
+console.log(myList);

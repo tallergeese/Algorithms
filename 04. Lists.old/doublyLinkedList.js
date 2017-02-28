@@ -30,24 +30,23 @@ var DoublyLinkedList = function() {
 };
 
 
-
-LinkedList.prototype.insert = function(index, value) {
+DoublyLinkedList.prototype.insert = function(index, value) {
   // ...
 };
 
-LinkedList.prototype.insertAfter = function(node, value) {
+DoublyLinkedList.prototype.insertAfter = function(node, value) {
   // ...
 };
 
-LinkedList.prototype.insertBefore = function(node, value) {
+DoublyLinkedList.prototype.insertBefore = function(node, value) {
   // ...
 };
 
-LinkedList.prototype.remove = function(index) {
+DoublyLinkedList.prototype.remove = function(index) {
   // ...
 };
 
-LinkedList.prototype.get = function (index) {
+DoublyLinkedList.prototype.get = function (index) {
     if (index > this.size){
         console.log('error, index not in list');
         return;
@@ -60,7 +59,7 @@ LinkedList.prototype.get = function (index) {
     return node.data;
 };
 
-LinkedList.prototype.set = function(index, value) {
+DoublyLinkedList.prototype.set = function(index, value) {
     if (index > this.size){
         console.log('error, index not in list');
         return;
@@ -74,7 +73,7 @@ LinkedList.prototype.set = function(index, value) {
     return node;
 };
 
-LinkedList.prototype.find = function(value) {
+DoublyLinkedList.prototype.find = function(value) {
   var node = this.head;
   var index = this.size;
   while (node.data !== value && index > 0){
@@ -86,7 +85,7 @@ LinkedList.prototype.find = function(value) {
   return false;
 };
 
-LinkedList.prototype.contains = function(value) {
+DoublyLinkedList.prototype.contains = function(value) {
     var currentNode = this.head;
     for (var i = 0; i < this.size ; i++){
         if (currentNode.data === value){
