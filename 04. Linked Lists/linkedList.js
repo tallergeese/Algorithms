@@ -120,7 +120,8 @@ LinkedList.prototype.remove = function(index) {
   }else{
     currentNode.next = currentNode.next.next;
   }
-  this.size--;};
+  this.size--;
+};
 
 LinkedList.prototype.get = function (index) {
   if (index > this.size){
