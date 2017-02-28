@@ -170,6 +170,19 @@ LinkedList.prototype.contains = function(value) {
   }
   return false;};
 
+function findEvenAverage(list){
+  var total = 0;
+  var count = 0;
+  var node = list.head;
+  while (node){
+    if (node.data%2===0){
+      total +=node.data;
+      count++;
+    }
+    node=node.next;
+  }
+  return total/count;
+}
 
 
 
