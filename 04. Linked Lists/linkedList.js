@@ -66,35 +66,109 @@ var LinkedListNode = function(data, next) {
 };
 
 var LinkedList = function() {
-  this.head = null;
+  this.head = new LinkedListNode(null, null);
   this.tail = this.head;
+  this.size = 0;
 };
 
 
 
 LinkedList.prototype.insert = function(index, value) {
-  // ...
+  if (index > this.size || index < 0){
+    console.log('error, index not in list');
+    return null;
+  }
+  if (index === null || index === undefined){
+    index = this.size;
+  }
+  var currentNode = this.head;
+  if (index === 0){
+    this.head = new LinkedListNode(value, this.head);
+    if (++this.size === 1){
+      this.tail = this.head;
+    }
+    return this.head;
+  }else{
+    for (var i = 0; i < index - 1; i++){
+      currentNode = currentNode.next;
+    }
+    currentNode.next = new LinkedListNode(value, currentNode.next);
+    if (index === this.size++){
+      this.tail=currentNode.next;
+      this.tail.next = null;
+    }
+  }
+  return currentNode.next;
 };
 
 LinkedList.prototype.remove = function(index) {
-  // ...
-};
+  var currentNode = this.head;
+  if (index === null || index === undefined){
+    index = this.size-1;
+  }
+  if (index === 0){
+    this.head = this.head.next;
+    this.size--;
+    return;
+  }
+  for (var i = 0; i < index-1; i++){
+    currentNode=currentNode.next;
+  }
+  if (index === this.size - 1){
+    this.tail = currentNode;
+    this.tail.next = null;
+  }else{
+    currentNode.next = currentNode.next.next;
+  }
+  this.size--;};
 
 LinkedList.prototype.get = function (index) {
-  // ...
-};
+  if (index > this.size){
+    console.log('error, index not in list');
+    return null;
+  }
+  var node = this.head;
+  while(index > 0){
+    node = node.next;
+    index--;
+  }
+  return node.data;};
 
 LinkedList.prototype.set = function(index, value) {
-  // ...
+  if (index > this.size){
+    console.log('error, index not in list');
+    return null;
+  }
+  var node = this.head;
+  while(index > 0){
+    node = node.next;
+    index--;
+  }
+  node.data=value;
+  return node;
 };
 
 LinkedList.prototype.find = function(value) {
-  // ...
-};
+  var node = this.head;
+  var index = this.size;
+  while (index > 0){
+    if (node.data === value){
+      return node;
+    }
+    node = node.next;
+    index--;
+  }
+  return node;};
 
 LinkedList.prototype.contains = function(value) {
-  // ...
-};
+  var currentNode = this.head;
+  for (var i = 0; i < this.size ; i++){
+    if (currentNode.data === value){
+      return true;
+    }
+    currentNode = currentNode.next;
+  }
+  return false;};
 
 
 
@@ -110,8 +184,6 @@ function toArray(fromWhichNode) {
 
   return result;
 }
-
-
 
 var list = new LinkedList();
 var x = null;
