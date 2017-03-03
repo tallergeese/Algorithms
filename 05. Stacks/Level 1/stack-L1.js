@@ -16,13 +16,16 @@
 
 var Stack = function() {
   this.storage = [];
+  this.size = 0;
 };
 
 Stack.prototype.push = function(value) {
-  // ...
+  this.storage[this.size] = value;
+  this.size++;
 };
 
 Stack.prototype.pop = function() {
-  // ...
+  this.size--;
+  return this.storage.splice(this.size - 1, 1);
 };
 
