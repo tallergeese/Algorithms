@@ -45,16 +45,16 @@
 
 */
 
-var DoubleStack = function(initialCapacity) {
-  this.storage = []; // Change to dynamic array or vector
+var DoubleStackV = function(initialCapacity) {
   this.max = 1 << 5;                                // max = 32
   this.min = initialCapacity || 8;                  // default to 8
+  this.storage = new Vector(this.min, this.max); // Change to dynamic array or vector
   this.length = 0;
   this.lengthFront = 0;
 };
 
 DoubleStack.prototype.push = function(value) {
-  // ...
+  
 };
 
 DoubleStack.prototype.pop = function() {
@@ -62,9 +62,13 @@ DoubleStack.prototype.pop = function() {
 };
 
 DoubleStack.prototype.pushFront = function(value) {
-  // ...
+  this.storage.add(value);
 };
 
 DoubleStack.prototype.popFront = function() {
-  // ...
+  this.storage.remove(--this.lengthFront);
 };
+
+Vector.prototype.doubleStackResize = function(){
+  console.log('yo');
+}
