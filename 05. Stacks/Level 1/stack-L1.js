@@ -25,7 +25,8 @@ Stack.prototype.push = function(value) {
 };
 
 Stack.prototype.pop = function() {
-  this.size--;
-  return this.storage.splice(this.size - 1, 1);
+  var popped = this.storage[--this.size];
+  this.storage[this.size] = undefined;
+  return popped;
 };
 

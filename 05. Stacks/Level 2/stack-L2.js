@@ -40,17 +40,21 @@ var DoubleStack = function(initialCapacity) {
 };
 
 DoubleStack.prototype.push = function(value) {
-  // ...
+  this.storage[this.storage.length - ++this.length] = value;
 };
 
 DoubleStack.prototype.pop = function() {
-  // ...
+  var popped = this.storage[this.storage.length - this.length]
+  this.storage[this.storage.length - this.length--] = undefined;
+  return popped;
 };
 
 DoubleStack.prototype.pushFront = function(value) {
-  // ...
+  this.storage[this.lengthFront++] = value;
 };
 
 DoubleStack.prototype.popFront = function() {
-  // ...
+  var popped = this.storage[--this.lengthFront];
+  this.storage[this.lengthFront] = undefined;
+  return popped;
 };
