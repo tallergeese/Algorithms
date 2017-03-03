@@ -35,17 +35,18 @@
 
 var DoubleStack = function(initialCapacity) {
   this.storage = new Array(initialCapacity || 16);
-  this.length = 0;
+  this.lengthBack = 0;
   this.lengthFront = 0;
+  this.length = this.lengthBack + this.lengthFront;
 };
 
 DoubleStack.prototype.push = function(value) {
-  this.storage[this.storage.length - ++this.length] = value;
+  this.storage[this.storage.length - ++this.lengthBack] = value;
 };
 
 DoubleStack.prototype.pop = function() {
-  var popped = this.storage[this.storage.length - this.length]
-  this.storage[this.storage.length - this.length--] = undefined;
+  var popped = this.storage[this.storage.length - this.lengthBack]
+  this.storage[this.storage.length - this.lengthBack--] = undefined;
   return popped;
 };
 
