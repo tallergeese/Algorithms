@@ -28,25 +28,29 @@
  */
 
 var Dequeue = function(initialCapacity) {
-  this.storage = new Array(initialCapacity || 16);
+  this.capacity = initialCapacity || 16;
+  this.storage = new Array(this.capacity);
   this.length = 0;
   this.lengthFront = 0;
 };
 
 
 Dequeue.prototype.queue = function(value) {
-  // ...
+  this.storage[this.lengthFront] = value;
+  this.lengthFront++;
 };
 
 Dequeue.prototype.dequeue = function() {
-  // ...
-};
+  this.lengthFront--;
+  return this.storage.splice(0, 1);};
 
 Dequeue.prototype.push = function(value) {
-  // ...
+  this.storage[this.capacity - ++this.length] = value;
 };
 
 Dequeue.prototype.pop = function() {
-  // ...
+  var temp = this.storage[this.capacity - this.length--];
+  this.storage[this.capacity - this.length + 1] = undefined;
+  return temp;
 };
 
