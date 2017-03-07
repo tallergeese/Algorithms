@@ -16,14 +16,15 @@
 
 var Queue = function() {
   this.storage = [];
+  this.length = 0;
 };
 
 Queue.prototype.enqueue = function(value) {
-  // ...
+  this.storage[this.length] = value;
 };
 
 Queue.prototype.dequeue = function() {
-  // ...
+  return this.storage.splice(this.length-1, 1);
 };
 
 
