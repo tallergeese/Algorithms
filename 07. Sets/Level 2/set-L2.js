@@ -100,35 +100,61 @@ var Set = function(capacity) {
 
 
 Set.prototype.add = function(value) {
-  // ...
+  this.storage[value] = true;
 };
 
 
 Set.prototype.remove = function(value) {
-  // ...
+  this.storage[value] = undefined;
 };
 
 
 Set.prototype.isMember = function(value) {
-  // ...
+  if (this.storage[value]){
+    return true;
+  }
+  return false; 
 };
 
 
 Set.prototype.union = function(B) {
-  // ...
+  var temp = {};
+  for (var y in this.storage){
+    temp[y] = true;
+  }
+  for (var x in B){
+    temp[x] = true;
+  }
+  return temp;
 };
 
 
 Set.prototype.intersect = function(B) {
-  // ...
+  var temp = {};
+  for (var x in B){
+    if (this.storage[x]){
+      temp[x] = true;
+    }
+  }
+  return temp;
 };
 
 
 Set.prototype.difference = function(B) {
-  // ...
-};
+  var temp = {};
+  for (var x in B){
+    if (!this.storage[x]){
+      temp[x] = true;
+    }
+  }
+  return temp;};
 
 
 Set.prototype.isSubset = function(B) {
-  // ...
+for (var x in B){
+  if(!this.storage[x]){
+    return false;
+  }
+}
+return true;
 };

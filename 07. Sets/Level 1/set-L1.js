@@ -29,6 +29,7 @@
 
 */
 
+
 var Set = function(capacity) {
   this.storage = { };
   this.length = 0;
@@ -37,15 +38,18 @@ var Set = function(capacity) {
 
 
 Set.prototype.add = function(value) {
-  // ...
+  this.storage[value] = true;
 };
 
 
 Set.prototype.remove = function(value) {
-  // ...
+  this.storage[value] = undefined;
 };
 
 
 Set.prototype.isMember = function(value) {
-  // ...
+  if (this.storage[value]){
+    return true;
+  }
+  return false; 
 };
