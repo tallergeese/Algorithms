@@ -21,10 +21,12 @@ var Queue = function() {
 
 Queue.prototype.enqueue = function(value) {
   this.storage[this.length] = value;
+  this.length++;
 };
 
 Queue.prototype.dequeue = function() {
-  return this.storage.splice(this.length-1, 1);
+  this.length--;
+  return this.storage.splice(0, 1);
 };
 
 
