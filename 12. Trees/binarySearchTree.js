@@ -17,16 +17,19 @@ var BinarySearchTree = function(){
   this.root = new Node();
 }
 
+//this definitely doesn't work
 BinarySearchTree.prototype.find = function (value, node){
   node = node || this.root;
   if (node.data === value){
     return node;
   }
-  var found = this.find(value, node.left);
-  if (!found){
-    found = this.find(value, node.right);
+  if (value < node.data){
+    node = node.left;
   }
-  return found;
+  else{
+    node = node.right;
+  }
+    this.find(value, node);
 }
 
 BinarySearchTree.prototype.add = function(value, node, direction){
