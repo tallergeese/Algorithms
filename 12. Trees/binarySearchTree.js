@@ -17,10 +17,10 @@ var BinarySearchTree = function(){
   this.root = new Node();
 }
 
-//this definitely doesn't work
 BinarySearchTree.prototype.find = function (value, node){
   node = node || this.root;
   if (node.data === value){
+    console.log(node);
     return node;
   }
   if (value < node.data){
@@ -32,7 +32,7 @@ BinarySearchTree.prototype.find = function (value, node){
     this.find(value, node);
 }
 
-BinarySearchTree.prototype.add = function(value, node, direction){
+BinarySearchTree.prototype.add = function(value, node){
   if (!this.root.data){
     this.root.data = value;
     return true;
@@ -40,19 +40,34 @@ BinarySearchTree.prototype.add = function(value, node, direction){
 
   node = node || this.root;
 
-  if (!node[direction] && node[direction] !== 0){
-    node[direction] = new Node(value);
-    return true;
-  }
-
   if (value < node.data){
-    direction = left;
+    direction = 'left';
   }
   else if (value > node.data){
-    direction = right;
+    direction = 'right';
   }
   else {
     return false;
   }
-  this.add(value, node, direction);
+
+  if (node[direction] === undefined){
+    node[direction] = new Node(value);
+    return true;
+  }
+  node = node[direction]
+  this.add(value, node);
 }
+
+var tree = new BinarySearchTree();
+
+tree.add(30);
+tree.add(12);
+tree.add(64);
+tree.add(34);
+tree.add(98);
+tree.add(44);
+tree.add(23);
+tree.add(53);
+
+console.log(tree);
+ 
